@@ -1,5 +1,8 @@
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Funcionario extends Pessoa {
 
@@ -26,5 +29,17 @@ public class Funcionario extends Pessoa {
 
     public void setFuncao(String funcao) {
         this.funcao = funcao;
+    }
+
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        NumberFormat formatadorMoeda = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"));
+
+
+        return String.format("Nome: %s | Data de nascimento: %s  | Salário: %s  | Função: %s", getNome(), getDataNascimento().format(formatadorData), formatadorMoeda.format(getSalario()), getFuncao());
+
     }
 }
