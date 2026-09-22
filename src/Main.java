@@ -1,6 +1,5 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,12 @@ public class Main {
         funcionarios.add(new Funcionario("Heloísa", LocalDate.of(2003, 5 , 24), new BigDecimal("1606.85"), "Eletricista"));
         funcionarios.add(new Funcionario("Helena", LocalDate.of(1996, 9 , 2), new BigDecimal("2799.93"), "Gerente"));
 
-        DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        imprimirFuncionarios(funcionarios);
 
+
+    }
+
+    public static void imprimirFuncionarios(List<Funcionario> funcionarios) {
         System.out.println("Lista de funcionários: ");
         for(Funcionario funcionario : funcionarios) {
             System.out.println(funcionario);
