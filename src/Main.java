@@ -1,8 +1,10 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Main {
     private static final BigDecimal SALARIO_MINIMO = new BigDecimal("1212.00");
@@ -37,6 +39,9 @@ public class Main {
         imprimirFuncionarios(funcionarios);
 
 
+        System.out.printf("%nTotal de salário recebido pelos funcionários: ");
+        calcularTotalSalario(funcionarios);
+
         System.out.printf("%nFuncionário - Quantidade de Salários Minimos.%n");
         quantidadeSalariosMinimos(funcionarios);
 
@@ -63,5 +68,16 @@ public class Main {
             BigDecimal qtdSalarios = funcionario.getSalario().divide(SALARIO_MINIMO, 2, RoundingMode.HALF_UP);
             System.out.printf("%s ganha %s salários minimos.%n", funcionario.getNome(), qtdSalarios);
         }
+    }
+
+    public static void calcularTotalSalario(List<Funcionario> funcionarios) {
+        BigDecimal totalSalarios = BigDecimal.ZERO;
+
+        for (Funcionario funcionario : funcionarios) {
+            totalSalarios = totalSalarios.add(funcionario.getSalario());
+        }
+
+        NumberFormat formatadorMoeda = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"));
+        System.out.println(formatadorMoeda.format(totalSalarios));
     }
 }
