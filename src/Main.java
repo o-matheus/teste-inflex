@@ -19,12 +19,19 @@ public class Main {
         funcionarios.add(new Funcionario("Heloísa", LocalDate.of(2003, 5 , 24), new BigDecimal("1606.85"), "Eletricista"));
         funcionarios.add(new Funcionario("Helena", LocalDate.of(1996, 9 , 2), new BigDecimal("2799.93"), "Gerente"));
 
+        System.out.print("\nPrint do total de funcionários");
         imprimirFuncionarios(funcionarios);
 
         funcionarios.removeIf(
                 funcionario -> funcionario.getNome().equals("João")
         );
 
+        System.out.print("\nApós retirada do João");
+        imprimirFuncionarios(funcionarios);
+
+        aumentoSalario(funcionarios);
+
+        System.out.print("\nDepois do aumento de salário");
         imprimirFuncionarios(funcionarios);
 
     }
@@ -33,6 +40,15 @@ public class Main {
         System.out.println("\nLista de funcionários: ");
         for(Funcionario funcionario : funcionarios) {
             System.out.println(funcionario);
+        }
+    }
+
+    public static void aumentoSalario(List<Funcionario> funcionarios) {
+        BigDecimal valorAumento = new BigDecimal("1.10");
+
+        for(Funcionario funcionario : funcionarios) {
+            BigDecimal novoSalario = funcionario.getSalario().multiply(valorAumento);
+            funcionario.setSalario(novoSalario);
         }
     }
 }
