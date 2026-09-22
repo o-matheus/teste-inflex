@@ -21,11 +21,16 @@ public class Main {
 
         imprimirFuncionarios(funcionarios);
 
+        funcionarios.removeIf(
+                funcionario -> funcionario.getNome().equals("João")
+        );
+
+        imprimirFuncionarios(funcionarios);
 
     }
 
     public static void imprimirFuncionarios(List<Funcionario> funcionarios) {
-        System.out.println("Lista de funcionários: ");
+        System.out.println("\nLista de funcionários: ");
         for(Funcionario funcionario : funcionarios) {
             System.out.println(funcionario);
         }
