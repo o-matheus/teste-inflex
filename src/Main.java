@@ -2,6 +2,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +46,11 @@ public class Main {
             System.out.printf("Nome: %s | Salário: %s%n",funcionario.getNome(), funcionario.getSalario());
         }
 
+        //3.9 -> Encontrar funcionário mais velho e imprimir com nome e idade.
+        Funcionario maisVelho = encontrarFuncionarioMaisVelho(funcionarios);
+        int idade = Period.between(maisVelho.getDataNascimento(), LocalDate.now()).getYears();
+
+        System.out.printf("%nNome do funcionário mais velho: %s | idade: %d anos%n", maisVelho.getNome(), idade);
 
         //3.10 -> Imprimir lista de funcionários em ordem alfabética.
         ordenarFuncionariosPorNome(funcionarios);
@@ -99,5 +105,16 @@ public class Main {
 
     public static void ordenarFuncionariosPorNome(List<Funcionario> funcionarios) {
         funcionarios.sort(Comparator.comparing(Funcionario::getNome));
+    }
+
+    public static Funcionario encontrarFuncionarioMaisVelho(List<Funcionario> funcionarios) {
+        Funcionario maisVelho = funcionarios.getFirst();
+
+        for(Funcionario funcionario : funcionarios) {
+            if (funcionario.getDataNascimento().isBefore(maisVelho.getDataNascimento())) {
+                maisVelho = funcionario;
+            }
+        }
+        return maisVelho;
     }
 }
