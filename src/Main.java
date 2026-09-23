@@ -2,7 +2,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +47,9 @@ public class Main {
         for(Funcionario funcionario : funcionarios) {
             System.out.printf("Nome: %s | Salário: %s%n",funcionario.getNome(), funcionario.getSalario());
         }
+
+        //3.8 -> Imprimir aniversariantes do mês de outubro e dezembro
+        funcionariosQueFazemAniversarioMes10Ou12(funcionarios);
 
         //3.9 -> Encontrar funcionário mais velho e imprimir com nome e idade.
         Funcionario maisVelho = encontrarFuncionarioMaisVelho(funcionarios);
@@ -116,5 +121,22 @@ public class Main {
             }
         }
         return maisVelho;
+    }
+
+    public static void funcionariosQueFazemAniversarioMes10Ou12(List<Funcionario> funcionarios) {
+        List<Funcionario> aniversariantes = new ArrayList<>();
+
+        for (Funcionario funcionario : funcionarios) {
+            if(funcionario.getDataNascimento().getMonth().equals(Month.DECEMBER) || funcionario.getDataNascimento().getMonth().equals(Month.OCTOBER)) {
+                aniversariantes.add(funcionario);
+            }
+        }
+
+        DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        System.out.printf("%nAniversariantes de outubro e dezembro:%n");
+        for (Funcionario funcionario : aniversariantes) {
+            System.out.printf("Nome: %s | Data de aniversário: %s%n", funcionario.getNome(), funcionario.getDataNascimento().format(formatadorData));
+        }
     }
 }
