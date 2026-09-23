@@ -48,6 +48,13 @@ public class Main {
             System.out.printf("Nome: %s | Salário: %s%n",funcionario.getNome(), funcionario.getSalario());
         }
 
+        //3.6 -> Agrupar funcionário por função.
+        System.out.printf("%nImpressão dos funcionários agrupados por função.%n");
+        agruparFuncionarioPorFuncao(funcionarios);
+        for(Funcionario funcionario : funcionarios) {
+            System.out.printf("Nome: %s | Função: %s%n", funcionario.getNome(), funcionario.getFuncao());
+        }
+
         //3.8 -> Imprimir aniversariantes do mês de outubro e dezembro
         funcionariosQueFazemAniversarioMes10Ou12(funcionarios);
 
@@ -138,5 +145,9 @@ public class Main {
         for (Funcionario funcionario : aniversariantes) {
             System.out.printf("Nome: %s | Data de aniversário: %s%n", funcionario.getNome(), funcionario.getDataNascimento().format(formatadorData));
         }
+    }
+
+    public static void agruparFuncionarioPorFuncao(List<Funcionario> funcionarios) {
+        funcionarios.sort(Comparator.comparing(Funcionario::getFuncao));
     }
 }
